@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_notes/pages/create_page.dart';
+import 'package:my_notes/pages/add_note_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
