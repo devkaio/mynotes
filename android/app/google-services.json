@@ -7,38 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:747224040088:android:883c1cf5c129f6df96c6ed",
+        "mobilesdk_app_id": "1:747224040088:android:134f599271e67a8596c6ed",
         "android_client_info": {
           "package_name": "com.example.my_notes"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "747224040088-bk1nkfbebu3h7klslbjtdojqoa27ib74.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAT934jB3Z2s5t4d1Qs8pGCFGySBQvf2lQ"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "747224040088-bk1nkfbebu3h7klslbjtdojqoa27ib74.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:747224040088:android:b9e0577354c7086696c6ed",
-        "android_client_info": {
-          "package_name": "com.example.notes"
         }
       },
       "oauth_client": [

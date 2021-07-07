@@ -6,6 +6,7 @@ class InputTextWidget extends StatelessWidget {
   final String label;
   final String hintText;
   final validator;
+  final focusNode;
   final ValueChanged<String> onChanged;
   final bool obscureText;
 
@@ -16,6 +17,7 @@ class InputTextWidget extends StatelessWidget {
     required this.label,
     required this.hintText,
     this.validator,
+    this.focusNode,
     required this.onChanged,
     required this.obscureText,
   }) : super(key: key);
@@ -27,6 +29,7 @@ class InputTextWidget extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         validator: validator,
+        focusNode: focusNode,
         keyboardType: textInputType,
         onChanged: onChanged,
         obscureText: obscureText,
