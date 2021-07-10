@@ -1,4 +1,4 @@
-class Validator {
+class Validators {
   static String? validateName({required String name}) {
     if (name.isEmpty) {
       return 'Name can\'t be empty';
@@ -14,6 +14,14 @@ class Validator {
       return 'Email can\'t be empty';
     } else if (!emailRegExp.hasMatch(email)) {
       return 'Enter a correct email';
+    }
+
+    return null;
+  }
+
+  static String? validateLoginEmail({required String email}) {
+    if (email.isEmpty) {
+      return 'Email can\'t be empty';
     }
 
     return null;

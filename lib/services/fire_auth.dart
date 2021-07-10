@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class FireAuth {
   // For registering a new user
   static Future<User?> registerUsingEmailPassword({
-    required String name,
+    required String fullName,
     required String email,
     required String password,
   }) async {
@@ -18,7 +18,7 @@ class FireAuth {
       );
 
       user = userCredential.user;
-      await user!.updateDisplayName(name);
+      await user!.updateDisplayName(fullName);
       await user.reload();
       user = auth.currentUser;
     } on FirebaseAuthException catch (e) {
@@ -66,5 +66,11 @@ class FireAuth {
     User? refreshedUser = auth.currentUser;
 
     return refreshedUser;
+  }
+
+  static Future<User?> resetPassword({required String email}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    auth.sendPasswordResetEmail(email: email);
   }
 }

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 class InputTextWidget extends StatelessWidget {
-  final TextEditingController? controller;
-  final TextInputType textInputType;
-  final String label;
-  final String hintText;
+  final controller;
+  final textInputType;
+  final label;
+  final hintText;
   final validator;
   final focusNode;
-  final ValueChanged<String> onChanged;
   final bool obscureText;
 
   const InputTextWidget({
@@ -18,7 +17,6 @@ class InputTextWidget extends StatelessWidget {
     required this.hintText,
     this.validator,
     this.focusNode,
-    required this.onChanged,
     required this.obscureText,
   }) : super(key: key);
 
@@ -31,7 +29,6 @@ class InputTextWidget extends StatelessWidget {
         validator: validator,
         focusNode: focusNode,
         keyboardType: textInputType,
-        onChanged: onChanged,
         obscureText: obscureText,
         decoration: InputDecoration(
           labelText: label,

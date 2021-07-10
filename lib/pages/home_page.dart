@@ -1,5 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:my_notes/pages/add_note_page.dart';
+import 'package:my_notes/pages/create_note_page.dart';
+
+import 'login_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,51 +15,55 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final notes = <Map<String, dynamic>>[];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Notes'),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: List.generate(
-            notes.length,
-            (index) => Card(
-              child: ListTile(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CreatePage(
-                                title: notes[index]['title'],
-                                subtitle: notes[index]['subtitle'],
-                              ))).then((value) {
-                    notes[index] = value;
-                    setState(() {});
-                  });
-                },
-                leading: Icon(Icons.book),
-                title: Text(notes[index]['title']),
-                subtitle: Text(notes[index]['subtitle']),
-              ),
-            ),
+    CollectionReference notes = FirebaseFirestore.instance.collection('notes');
+
+    return MaterialApp(
+      home: Scaffold(
+        body: SafeArea(
+          child: StreamBuilder(
+            stream: notes.orderBy('title').snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (!snapshot.hasData) {
+                return Center(child: Text('Loading'));
+              }
+
+              return ListView(
+                children: snapshot.data!.docs.map((note) {
+                  return Column(
+                    children: [
+                      ListTile(
+                        title: Text(note['title']),
+                        subtitle: Text(note['subtitle']),
+                        onLongPress: () {
+                          note.reference.delete();
+                        },
+                      ),
+                    ],
+                  );
+                }).toList(),
+              );
+            },
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CreatePage()))
-              .then((value) {
-            notes.add(value);
-            setState(() {});
-          });
-        },
-        icon: Icon(Icons.add),
-        label: Text('Criar'),
+        persistentFooterButtons: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => CreateNotePage()));
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+
+              Navigator.pushReplacementNamed(context, '/login');
+            },
+          ),
+        ],
       ),
     );
   }

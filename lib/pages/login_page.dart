@@ -7,7 +7,7 @@ import 'package:my_notes/shared/button_widget.dart';
 import 'package:my_notes/shared/input_text_widget.dart';
 import 'package:my_notes/shared/text_button_widget.dart';
 import 'package:my_notes/shared/text_widget.dart';
-import 'package:my_notes/validators/validator.dart';
+import 'package:my_notes/validators/validators.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -31,16 +31,22 @@ class _LoginPageState extends State<LoginPage> {
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => ProfilePage(
-            user: user,
-          ),
-        ),
-      );
+      Navigator.pushReplacementNamed(context, '/home');
     }
 
     return firebaseApp;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailTextController.dispose();
+    _passwordTextController.dispose();
+    super.dispose();
   }
 
   @override
@@ -79,20 +85,18 @@ class _LoginPageState extends State<LoginPage> {
                               hintText: 'Type your e-mail',
                               controller: _emailTextController,
                               focusNode: _focusEmail,
-                              onChanged: (value) {},
                               obscureText: false,
                               validator: (value) =>
-                                  Validator.validateEmail(email: value),
+                                  Validators.validateEmail(email: value),
                             ),
                             InputTextWidget(
                               label: 'Password',
                               hintText: 'Type your password',
                               controller: _passwordTextController,
                               focusNode: _focusPassword,
-                              onChanged: (value) {},
                               obscureText: true,
                               validator: (value) =>
-                                  Validator.validatePassword(password: value),
+                                  Validators.validatePassword(password: value),
                             ),
                             TextButtonWidget(
                               onPressed: () {
@@ -124,35 +128,26 @@ class _LoginPageState extends State<LoginPage> {
                                         });
 
                                         if (user != null) {
-                                          Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ProfilePage(user: user),
+                                          Navigator.pushReplacementNamed(
+                                              context, '/home');
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                  'No user found for that email. Please Sign Up!'),
                                             ),
                                           );
+                                          Navigator.pushReplacementNamed(
+                                              context, '/create-account');
                                         }
                                       }
                                     },
                                     color: Color(0xFF3EBC90),
                                   ),
                             TextButtonWidget(
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  User? user =
-                                      await FireAuth.signInUsingEmailPassword(
-                                    email: _emailTextController.text,
-                                    password: _passwordTextController.text,
-                                  );
-                                  print('success');
-                                  if (user != null) {
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ProfilePage(user: user)),
-                                    );
-                                    print('fail');
-                                  }
-                                }
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/create-account');
                               },
                               text: 'Don\'t have an account yet? Sign Up!',
                             ),
