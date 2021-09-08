@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_notes/pages/create_account_page.dart';
 import 'package:my_notes/pages/create_note_page.dart';
 import 'package:my_notes/pages/home_page.dart';
-import 'package:my_notes/pages/login_page.dart';
+import 'package:my_notes/modules/login/login_page.dart';
 import 'package:my_notes/pages/reset_password_page.dart';
 
 class AppWidget extends StatelessWidget {

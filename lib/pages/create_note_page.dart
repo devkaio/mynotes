@@ -62,7 +62,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
                             addNote();
                             setState(() {});
                           },
-                          child: Text("Salvar"))),
+                          child: Text("Save"))),
                 ],
               )
             ],
