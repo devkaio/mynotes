@@ -1,16 +1,20 @@
-# my_notes
+# MyNotes
 
-A new Flutter project.
+A Notes app built with Flutter.
 
-## Getting Started
+## Result
 
-This project is a starting point for a Flutter application.
+This project is a Work In Progress.
 
-A few resources to get you started if this is your first Flutter project:
+![Screenshot Login](./flutter_01.png)
+![Screenshot Create Account](./flutter_02.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features 
+- [x] Create Account
+- [x] Login Page
+- [x] Reset Password
+- [x] Firebase Integration
+- [ ] Profile Page
+- [ ] Home Page
+- [ ] Create Note Page
+- [ ] Define State Management with BLoC, MobX or Provider
