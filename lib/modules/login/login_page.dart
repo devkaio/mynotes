@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                               fit: BoxFit.cover,
                             ),
                             TextWidget(
-                              text: 'Welcome back!',
+                              text: 'Welcome to MyNotes!',
                               fontSize: 24.0,
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF3EBC90),
