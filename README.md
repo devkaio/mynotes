@@ -1,6 +1,6 @@
 # MyNotes
 
-A Notes app built with Flutter.
+Notes app built with Flutter.
 
 ## Result
 
